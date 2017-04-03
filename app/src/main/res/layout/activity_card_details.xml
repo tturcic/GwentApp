@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical">
+
+    <include layout="@layout/toolbar"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <FrameLayout
+                android:id="@+id/cardLayout"
+                android:layout_width="225dp"
+                android:layout_height="300dp"
+                android:clipChildren="false">
+
+                <ImageView
+                    android:id="@+id/imgFaction1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:contentDescription="@null"
+                    android:padding="25dp"
+                    android:rotation="12"
+                    android:src="@drawable/faction_monsters_large" />
+
+                <ImageView
+                    android:id="@+id/imgFaction2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:contentDescription="@null"
+                    android:padding="25dp"
+                    android:rotation="-12"
+                    android:src="@drawable/faction_monsters_large" />
+
+                <ImageView
+                    android:id="@+id/imgCardDetails"
+                    android:layout_width="250dp"
+                    android:layout_height="350dp"
+                    android:adjustViewBounds="true"
+                    android:contentDescription="@null"
+                    android:paddingBottom="30dp"
+                    android:paddingRight="50dp"
+                    android:rotation="5"
+                    android:src="@drawable/adrenaline_rush" />
+
+            </FrameLayout>
+
+            <TextView
+                android:id="@+id/txtCardName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                tools:text="Geralt" />
+
+            <TextView
+                android:id="@+id/txtCardFlavour"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:textSize="17sp"
+                android:textStyle="italic"
+                tools:text="Geralt" />
+
+        </LinearLayout>
+
+    </ScrollView>
+</LinearLayout>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <color name="color_monsters">#A30806</color>
+    <color name="color_monsters_status_bar">#8e0a08</color>
+    <color name="color_nilfgaard">#343B43</color>
+    <color name="color_nilfgaard_status_bar">#202429</color>
+    <color name="color_northern_realms">#18456F</color>
+    <color name="color_northern_realms_status_bar">#11304e</color>
+    <color name="color_scoia_tael">#689107</color>
+    <color name="color_scoia_tael_status_bar">#4e6c05</color>
+    <color name="color_skellige">#392047</color>
+    <color name="color_skellige_status_bar">#211329</color>
+
+</resources>

@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">GwentApp</string>
+
+    <!-- General errors -->
+    <string name="error_general">Something went wrong</string>
+    <string name="error_connection">Check your network connection.</string>
+
+    <!-- Download activity string -->
+    <string name="download_checking_version">Checking your card collection…</string>
+    <string name="download_downloading_cards">Downloading cards…</string>
+    <string name="download_completed">Download complete!</string>
+    <string name="download_progress">%1$d / %2$d</string>
+    <string name="download_retry">Retry</string>
+</resources>
