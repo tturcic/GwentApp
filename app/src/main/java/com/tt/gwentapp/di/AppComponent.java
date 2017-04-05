@@ -6,7 +6,6 @@ import com.tt.gwentapp.data.local.RealmModule;
 import com.tt.gwentapp.data.remote.ApiModule;
 import com.tt.gwentapp.data.remote.ApiService;
 import com.tt.gwentapp.data.remote.RxTransformer;
-import com.tt.gwentapp.ui.cards.CardFragment;
 import com.tt.gwentapp.ui.details.CardDetailsActivity;
 
 import javax.inject.Singleton;
@@ -28,8 +27,6 @@ public interface AppComponent {
     Realm getRealm();
 
     void inject(App app);
-
-    void inject(CardFragment cardFragment);
 
     void inject(CardDetailsActivity cardDetailsActivity);
 }

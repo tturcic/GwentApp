@@ -1,12 +1,12 @@
 package com.tt.gwentapp.presentation;
 
+import com.tt.gwentapp.data.local.CardDatabase;
 import com.tt.gwentapp.models.Card;
 import com.tt.gwentapp.models.Faction;
 import com.tt.gwentapp.models.Rarity;
 import com.tt.gwentapp.ui.cards.CardView;
 
-import io.realm.Realm;
-import io.realm.Sort;
+import java.util.List;
 
 /**
  * @author tturcic
@@ -14,44 +14,21 @@ import io.realm.Sort;
  */
 public class CardPresenter extends BasePresenter<CardView> {
 
-    private final Realm realm;
+    private final CardDatabase database;
 
-    public CardPresenter(CardView view, Realm realm) {
+    public CardPresenter(CardView view, CardDatabase database) {
         super(view);
-        this.realm = realm;
+        this.database = database;
     }
 
-    public void getCards(Faction faction) {
-        switch (faction) {
-            case NEUTRAL:
-                view.showCards(realm.where(Card.class).equalTo("faction", Card.FactionName.NEUTRAL).findAll().sort("name", Sort.ASCENDING));
-                break;
-            case NIFLGAARD:
-                view.showCards(realm.where(Card.class).equalTo("faction", Card.FactionName.NILFGAARD).findAll().sort("name", Sort.ASCENDING));
-                break;
-            case SCOIA_TAEL:
-                view.showCards(realm.where(Card.class).equalTo("faction", Card.FactionName.SCOIA_TAEL).findAll().sort("name", Sort.ASCENDING));
-                break;
-            case SKELLIGE:
-                view.showCards(realm.where(Card.class).equalTo("faction", Card.FactionName.SKELLIGE).findAll().sort("name", Sort.ASCENDING));
-                break;
-            case NORTHERN_REALMS:
-                view.showCards(realm.where(Card.class).equalTo("faction", Card.FactionName.NORTHERN_REALMS).findAll().sort("name", Sort.ASCENDING));
-                break;
-            case MONSTERS:
-                view.showCards(realm.where(Card.class).equalTo("faction", Card.FactionName.MONSTERS).findAll().sort("name", Sort.ASCENDING));
-                break;
-            case ALL:
-            default:
-                view.showCards(realm.where(Card.class).findAll().sort("name", Sort.ASCENDING));
-                break;
-        }
+    public List<Card> getCards(Faction faction) {
+        return database.getCardsForFaction(faction);
     }
 
     @Override
     public void unsubscribe() {
         super.unsubscribe();
-        realm.close();
+        database.close();
     }
 
     public void onRarityCheckedChanged(Rarity rarity){

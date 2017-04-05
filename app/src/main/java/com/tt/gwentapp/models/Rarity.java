@@ -6,9 +6,10 @@ package com.tt.gwentapp.models;
  */
 public enum Rarity {
 
-    ALL,
     COMMON,
     RARE,
     EPIC,
-    LEGENDARY
+    LEGENDARY;
+
 }
+

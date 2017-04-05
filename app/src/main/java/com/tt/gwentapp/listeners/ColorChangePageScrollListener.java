@@ -6,6 +6,9 @@ import android.support.v4.view.ViewPager;
 /**
  * @author tturcic
  *         \date 27.3.2017.
+ *
+ *         Performs a color change between provide values when user scrolls through tabs.
+ *
  */
 public class ColorChangePageScrollListener implements ViewPager.OnPageChangeListener {
 

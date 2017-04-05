@@ -1,5 +1,8 @@
 package com.tt.gwentapp.di.activity;
 
+import android.app.Activity;
+import android.support.v7.app.AppCompatActivity;
+
 import com.tt.gwentapp.data.local.CardDatabase;
 import com.tt.gwentapp.data.local.RealmDatabase;
 import com.tt.gwentapp.utils.LogUtils;
@@ -16,6 +19,18 @@ import io.realm.Realm;
  */
 @Module
 public class ActivityModule {
+
+    /*private AppCompatActivity activity;
+
+    public ActivityModule(AppCompatActivity activity) {
+        this.activity = activity;
+    }
+
+    @ActivityScope
+    @Provides
+    AppCompatActivity provideActivity(){
+        return activity;
+    }*/
 
     @ActivityScope
     @Provides

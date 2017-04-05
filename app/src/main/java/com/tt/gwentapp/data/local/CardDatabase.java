@@ -13,7 +13,9 @@ public interface CardDatabase {
 
     void saveCardsToDatabase(List<Card> cards);
 
-    List<Card> getCardsForFaction(String factionName);
+    List<Card> getCardsForFaction(Faction faction);
+
+    List<Card> getCards(CardFilter cardFilter);
 
     void close();
 

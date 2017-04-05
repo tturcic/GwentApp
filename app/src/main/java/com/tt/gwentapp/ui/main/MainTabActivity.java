@@ -12,12 +12,23 @@ import android.util.SparseArray;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.tt.gwentapp.App;
 import com.tt.gwentapp.R;
+import com.tt.gwentapp.di.activity.CardActivityComponent;
+import com.tt.gwentapp.di.activity.CardActivityModule;
+import com.tt.gwentapp.di.activity.DaggerCardActivityComponent;
 import com.tt.gwentapp.listeners.ColorChangePageScrollListener;
+import com.tt.gwentapp.models.Card;
 import com.tt.gwentapp.models.Faction;
+import com.tt.gwentapp.presentation.CardPresenter;
 import com.tt.gwentapp.ui.BaseActivity;
 import com.tt.gwentapp.ui.adapters.MainTabAdapter;
 import com.tt.gwentapp.ui.cards.CardFragment;
+import com.tt.gwentapp.ui.cards.CardView;
+
+import java.util.List;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 
@@ -25,13 +36,16 @@ import butterknife.BindView;
  * @author tturcic
  *         \date 27.3.2017.
  */
-public class MainTabActivity extends BaseActivity {
+public class MainTabActivity extends BaseActivity implements CardView {
 
     @BindView(R.id.toolbar) Toolbar toolbar;
     @BindView(R.id.viewPager) ViewPager viewPager;
     @BindView(R.id.tabLayout) TabLayout tabLayout;
 
+    private CardActivityComponent component;
     private MainTabAdapter mainTabAdapter;
+
+    @Inject CardPresenter presenter;
 
     @Override
     protected int getLayoutResId() {
@@ -41,6 +55,12 @@ public class MainTabActivity extends BaseActivity {
     @Override
     protected void setupUI(Bundle savedInstanceState) {
         setSupportActionBar(toolbar);
+
+        component = DaggerCardActivityComponent.builder()
+                .appComponent(App.getApp(this).getAppComponent())
+                .cardActivityModule(new CardActivityModule(this))
+                .build();
+
         viewPager.setAdapter(mainTabAdapter = new MainTabAdapter(getSupportFragmentManager()));
         tabLayout.setupWithViewPager(viewPager);
 
@@ -73,32 +93,42 @@ public class MainTabActivity extends BaseActivity {
             case R.id.menuCheckCommon:
                 for(int i = 0; i <cardsFragments.size(); i++) {
                     CardFragment fragment  = cardsFragments.valueAt(i);
-                    if(fragment != null)
-                        fragment.onRarityCommonCheckedChanged(item.isChecked());
+                    //if(fragment != null)
+                      //  fragment.onRarityCommonCheckedChanged(item.isChecked());
                 }
                 break;
             case R.id.menuCheckRare:
                 for(int i = 0; i <cardsFragments.size(); i++) {
                     CardFragment fragment = cardsFragments.valueAt(i);
-                    if (fragment != null)
-                        fragment.onRarityRareCheckedChanged(item.isChecked());
+                    //if (fragment != null)
+                      //  fragment.onRarityRareCheckedChanged(item.isChecked());
                 }
                 break;
             case R.id.menuCheckEpic:
                 for(int i = 0; i <cardsFragments.size(); i++) {
                     CardFragment fragment = cardsFragments.valueAt(i);
-                    if (fragment != null)
-                        fragment.onRarityEpicCheckedChanged(item.isChecked());
+                    //if (fragment != null)
+                      //  fragment.onRarityEpicCheckedChanged(item.isChecked());
                 }
                 break;
             case R.id.menuCheckLegendary:
                 for(int i = 0; i <cardsFragments.size(); i++) {
                     CardFragment fragment = cardsFragments.valueAt(i);
-                    if (fragment != null)
-                        fragment.onRarityLegendaryCheckedChanged(item.isChecked());
+                    //if (fragment != null)
+                      //  fragment.onRarityLegendaryCheckedChanged(item.isChecked());
                 }
                 break;
         }
         return false;
+    }
+
+    @Override
+    public void showCards(List<Card> cards) {
+
+    }
+
+
+    public CardActivityComponent getComponent() {
+        return component;
     }
 }
