@@ -63,32 +63,14 @@ public class DownloadPresenter extends BasePresenter<DownloadView> {
         addSubscription(downloadInteractor.getCards()
                 .compose(rxTransformer.chainSchedulers())
                 //.doOnNext(new Subscriber<>())
-                .doOnNext(new Action1<List<Card>>() {
-                    @Override
-                    public void call(List<Card> cards) {
-                        view.showHideProgressIndicator(false);
-                        view.setProgressInfoText(R.string.download_completed);
-                        database.saveCardsToDatabase(cards);
-                        prefsManager.setLatestCardVersion(latestCardVersion);
-                    }
+                .doOnNext(cards -> {
+                    view.showHideProgressIndicator(false);
+                    view.setProgressInfoText(R.string.download_completed);
+                    database.saveCardsToDatabase(cards);
+                    prefsManager.setLatestCardVersion(latestCardVersion);
                 })
                 .delay(2000, TimeUnit.MILLISECONDS)
-                .subscribe(new Subscriber<List<Card>>() {
-                    @Override
-                    public void onCompleted() {
-
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        DownloadPresenter.this.onError(e);
-                    }
-
-                    @Override
-                    public void onNext(List<Card> cards) {
-                        view.navigateToMain();
-                    }
-                }));
+                .subscribe(cards -> view.navigateToMain(), this::onError));
     }
 
     private void onError(Throwable throwable) {
