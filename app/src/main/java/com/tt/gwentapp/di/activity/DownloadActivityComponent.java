@@ -10,7 +10,7 @@ import dagger.Component;
  *         \date 31.3.2017.
  */
 @ActivityScope
-@Component(dependencies = AppComponent.class, modules = DownloadActivityModule.class)
+@Component(dependencies = AppComponent.class, modules = {DownloadActivityModule.class})
 public interface DownloadActivityComponent {
 
     void inject(DownloadActivity activity);

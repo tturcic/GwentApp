@@ -6,7 +6,7 @@ import dagger.Module;
  * @author tturcic
  *         \date 27.3.2017.
  */
-@Module
+@Module(includes = ActivityModule.class)
 public class CardActivityModule {
 
 

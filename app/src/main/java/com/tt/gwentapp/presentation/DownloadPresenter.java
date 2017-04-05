@@ -1,19 +1,14 @@
 package com.tt.gwentapp.presentation;
 
 import com.tt.gwentapp.R;
-import com.tt.gwentapp.data.local.DatabaseInteractor;
+import com.tt.gwentapp.data.local.CardDatabase;
 import com.tt.gwentapp.data.local.PrefsManager;
 import com.tt.gwentapp.data.remote.RxTransformer;
 import com.tt.gwentapp.interactors.DownloadInteractor;
-import com.tt.gwentapp.models.Card;
 import com.tt.gwentapp.ui.download.DownloadView;
 
 import java.io.IOException;
-import java.util.List;
 import java.util.concurrent.TimeUnit;
-
-import rx.Subscriber;
-import rx.functions.Action1;
 
 /**
  * @author tturcic
@@ -22,16 +17,16 @@ import rx.functions.Action1;
 public class DownloadPresenter extends BasePresenter<DownloadView> {
 
     private final DownloadInteractor downloadInteractor;
-    //private final Scheduler androidScheduler;
-    private final RxTransformer rxTransformer;
-    private final DatabaseInteractor database;
+    private final CardDatabase database;
     private final PrefsManager prefsManager;
+    private final RxTransformer rxTransformer;
 
-    public DownloadPresenter(DownloadView view, DownloadInteractor downloadInteractor, RxTransformer rxTransformer, DatabaseInteractor databaseInteractor, PrefsManager prefsManager) {
+    public DownloadPresenter(DownloadView view, DownloadInteractor downloadInteractor,
+                             CardDatabase cardDatabase, RxTransformer rxTransformer, PrefsManager prefsManager) {
         super(view);
         this.downloadInteractor = downloadInteractor;
         this.rxTransformer = rxTransformer;
-        this.database = databaseInteractor;
+        this.database = cardDatabase;
         this.prefsManager = prefsManager;
     }
 
@@ -45,7 +40,6 @@ public class DownloadPresenter extends BasePresenter<DownloadView> {
         addSubscription(downloadInteractor.getLatestDbVersion()
                 .compose(rxTransformer.chainSchedulers())
                 .subscribe(s -> {
-                    //LogUtils.log(s);
                     String prevVersion = prefsManager.getLatestCardVersion();
                     if(prevVersion != null && prevVersion.equals(s)){
                         // Same DB version - proceed to next screen

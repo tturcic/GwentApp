@@ -9,7 +9,7 @@ import java.util.List;
  * @author tturcic
  *         \date 3.4.2017.
  */
-public interface DatabaseInteractor {
+public interface CardDatabase {
 
     void saveCardsToDatabase(List<Card> cards);
 

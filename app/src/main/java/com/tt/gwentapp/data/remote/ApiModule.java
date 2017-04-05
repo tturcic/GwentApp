@@ -26,24 +26,24 @@ public class ApiModule {
     private static final String BASE_URL = "https://gwent-api.herokuapp.com/";
 
     @Provides
-    static HttpLoggingInterceptor provideHttpLoggingInterceptor(){
+    static HttpLoggingInterceptor provideHttpLoggingInterceptor() {
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
         interceptor.setLevel(BuildConfig.DEBUG ? HttpLoggingInterceptor.Level.BODY : HttpLoggingInterceptor.Level.NONE);
         return interceptor;
     }
 
     @Provides
-    static GsonConverterFactory provideGsonConverterFactory(){
+    static GsonConverterFactory provideGsonConverterFactory() {
         return GsonConverterFactory.create();
     }
 
     @Provides
-    static RxJavaCallAdapterFactory provideRxJavaCallAdapterFactory(){
+    static RxJavaCallAdapterFactory provideRxJavaCallAdapterFactory() {
         return RxJavaCallAdapterFactory.create();
     }
 
     @Provides
-    static OkHttpClient provideOkHttpClient(HttpLoggingInterceptor interceptor){
+    static OkHttpClient provideOkHttpClient(HttpLoggingInterceptor interceptor) {
         return new OkHttpClient.Builder()
                 .addInterceptor(interceptor)
                 .connectTimeout(15, TimeUnit.SECONDS)
@@ -52,7 +52,7 @@ public class ApiModule {
     }
 
     @Provides
-    static Retrofit provideRetrofit(OkHttpClient client, GsonConverterFactory factory, RxJavaCallAdapterFactory rxFactory){
+    static Retrofit provideRetrofit(OkHttpClient client, GsonConverterFactory factory, RxJavaCallAdapterFactory rxFactory) {
         return new Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .client(client)
@@ -63,13 +63,14 @@ public class ApiModule {
 
     @Singleton
     @Provides
-    static ApiService provideApiService(Retrofit retrofit){
+    static ApiService provideApiService(Retrofit retrofit) {
         return retrofit.create(ApiService.class);
     }
 
     @Provides
-    static Scheduler provideAndroidScheduler(){
-        return AndroidSchedulers.mainThread();
+    @Singleton
+    static RxTransformer provideAndroidRxTransformer() {
+        return new RxTransformer.DefaultRxTransformer();
     }
 
 }

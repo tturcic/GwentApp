@@ -1,6 +1,6 @@
 package com.tt.gwentapp.di.activity;
 
-import com.tt.gwentapp.data.local.DatabaseInteractor;
+import com.tt.gwentapp.data.local.CardDatabase;
 import com.tt.gwentapp.data.local.PrefsManager;
 import com.tt.gwentapp.data.remote.ApiService;
 import com.tt.gwentapp.data.remote.RxTransformer;
@@ -11,13 +11,12 @@ import com.tt.gwentapp.ui.download.DownloadView;
 
 import dagger.Module;
 import dagger.Provides;
-import rx.Scheduler;
 
 /**
  * @author tturcic
  *         \date 31.3.2017.
  */
-@Module
+@Module(includes = ActivityModule.class)
 public class DownloadActivityModule {
 
     private final DownloadView view;
@@ -40,8 +39,8 @@ public class DownloadActivityModule {
 
     @Provides
     @ActivityScope
-    static DownloadPresenter provideDownloadPresenter(DownloadView view, DownloadInteractor downloadInteractor,
-                                                      Scheduler scheduler, DatabaseInteractor databaseInteractor, PrefsManager prefsManager){
-        return new DownloadPresenter(view, downloadInteractor, new RxTransformer.DefaultRxTransformer(), databaseInteractor, prefsManager);
+    static DownloadPresenter provideDownloadPresenter(DownloadView view, DownloadInteractor downloadInteractor, RxTransformer rxTransformer,
+                                                      CardDatabase cardDatabase, PrefsManager prefsManager){
+        return new DownloadPresenter(view, downloadInteractor, cardDatabase, rxTransformer, prefsManager);
     }
 }

@@ -15,7 +15,7 @@ import rx.Observable;
  */
 public class DownloadInteractorImpl implements DownloadInteractor {
 
-    public static final String LATEST_DB_VERSION = "1.01";
+    public static final String LATEST_DB_VERSION = "1.02";
 
     private final ApiService apiService;
 
@@ -42,6 +42,9 @@ public class DownloadInteractorImpl implements DownloadInteractor {
                 });
     }
 
+    /**
+     * We're faking a response from server by having a two seconds delay.
+     */
     @Override
     public Observable<String> getLatestDbVersion() {
         return Observable.just(LATEST_DB_VERSION).delay(2000, TimeUnit.MILLISECONDS);

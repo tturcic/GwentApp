@@ -26,13 +26,13 @@ public class RealmModule {
         return b.build();
     }
 
+    /**
+     * Not a singleton!
+     * We want to provide each activity with a new reference to realm.
+     * Each activity that uses realm database  is therefore expected to perform realm.close()
+     */
     @Provides
     static Realm provideRealm(RealmConfiguration realmConfiguration){
         return Realm.getInstance(realmConfiguration);
-    }
-
-    @Provides
-    static DatabaseInteractor provideRealmInteractor(Realm realm){
-        return new RealmInteractor(realm);
     }
 }

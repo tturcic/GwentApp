@@ -1,22 +1,18 @@
 package com.tt.gwentapp.presentation;
 
 import com.tt.gwentapp.RxHelper;
-import com.tt.gwentapp.data.local.DatabaseInteractor;
+import com.tt.gwentapp.data.local.CardDatabase;
 import com.tt.gwentapp.data.local.PrefsManager;
-import com.tt.gwentapp.data.remote.ApiService;
 import com.tt.gwentapp.data.remote.RxTransformer;
 import com.tt.gwentapp.interactors.DownloadInteractor;
 import com.tt.gwentapp.interactors.DownloadInteractorImpl;
-import com.tt.gwentapp.models.Card;
 import com.tt.gwentapp.ui.download.DownloadView;
-import com.tt.gwentapp.utils.LogUtils;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
 
@@ -25,14 +21,7 @@ import java.util.ArrayList;
 
 import rx.Observable;
 import rx.Scheduler;
-import rx.Subscriber;
-import rx.android.plugins.RxAndroidPlugins;
-import rx.observers.TestSubscriber;
-import rx.plugins.RxJavaSchedulersHook;
-import rx.schedulers.Schedulers;
-import rx.schedulers.TestScheduler;
 
-import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
 /**
@@ -45,7 +34,7 @@ public class DownloadPresenterTest {
     @Mock DownloadView view;
     @Mock DownloadInteractor downloadInteractor;
     @Mock Scheduler scheduler;
-    @Mock DatabaseInteractor databaseInteractor;
+    @Mock CardDatabase cardDatabase;
     @Mock PrefsManager prefsManager;
 
     private DownloadPresenter presenter;
@@ -57,8 +46,8 @@ public class DownloadPresenterTest {
     public void setup(){
         MockitoAnnotations.initMocks(this);
 
-
-        presenter = new DownloadPresenter(view, downloadInteractor, new RxTransformer.TestTransformer(), databaseInteractor, prefsManager);
+        presenter = new DownloadPresenter(view, downloadInteractor,
+                cardDatabase, new RxTransformer.TestTransformer(), prefsManager);
     }
 
     @After
@@ -116,7 +105,7 @@ public class DownloadPresenterTest {
         presenter.getContent();
 
         verify(downloadInteractor, atLeastOnce()).getCards();
-        verify(databaseInteractor, atLeastOnce()).saveCardsToDatabase(anyList());
+        verify(cardDatabase, atLeastOnce()).saveCardsToDatabase(anyList());
         verify(view, atLeastOnce()).setProgressInfoText(anyInt());
         verify(view, atLeastOnce()).showHideProgressIndicator(false);
         verify(prefsManager, atLeastOnce()).setLatestCardVersion(anyString());
@@ -125,7 +114,7 @@ public class DownloadPresenterTest {
     @Test
     public void testCloseDatabaseOnUnsubscribe() throws Exception {
         presenter.unsubscribe();
-        verify(databaseInteractor).close();
+        verify(cardDatabase).close();
     }
 
 }
