@@ -46,7 +46,7 @@ public class MainTabAdapter extends FragmentPagerAdapter {
 
     @Override
     public CharSequence getPageTitle(int position) {
-        return Faction.values()[position].getName();
+        return Faction.values()[position].getUiName();
     }
 
     public SparseArray<CardFragment> getCardFragments(){

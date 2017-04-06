@@ -11,4 +11,14 @@
     <string name="download_completed">Download complete!</string>
     <string name="download_progress">%1$d / %2$d</string>
     <string name="download_retry">Retry</string>
+
+    <!-- Rarities -->
+    <string name="rarity_common">Common</string>
+    <string name="rarity_rare">Rare</string>
+    <string name="rarity_epic">Epic</string>
+    <string name="rarity_legendary">Legendary</string>
+
+    <!-- Card filter dialog -->
+    <string name="card_filter_dialog_title">Filter cards by rarity:</string>
+
 </resources>

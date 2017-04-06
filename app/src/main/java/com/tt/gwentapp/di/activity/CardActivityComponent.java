@@ -1,6 +1,7 @@
 package com.tt.gwentapp.di.activity;
 
 import com.tt.gwentapp.di.AppComponent;
+import com.tt.gwentapp.ui.cards.CardFilterDialog;
 import com.tt.gwentapp.ui.cards.CardFragment;
 import com.tt.gwentapp.ui.main.MainActivity;
 import com.tt.gwentapp.ui.main.MainTabActivity;
@@ -18,5 +19,6 @@ public interface CardActivityComponent {
     void inject(MainTabActivity mainTabActivity);
     void inject(MainActivity mainActivity);
     void inject(CardFragment fragment);
+    void inject(CardFilterDialog dialog);
 
 }

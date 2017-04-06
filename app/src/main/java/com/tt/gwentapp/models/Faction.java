@@ -1,5 +1,8 @@
 package com.tt.gwentapp.models;
 
+import android.support.annotation.ColorInt;
+import android.support.annotation.DrawableRes;
+
 import com.tt.gwentapp.R;
 
 /**
@@ -11,13 +14,13 @@ import com.tt.gwentapp.R;
  */
 public enum Faction {
 
-    ALL("All", R.color.colorPrimary, R.color.colorPrimaryDark,
+    ALL("All", R.color.color_all, R.color.color_all_status_bar,
             R.drawable.faction_monsters, R.drawable.faction_monsters_large),
 
     MONSTERS("Monsters", R.color.color_monsters, R.color.color_monsters_status_bar,
             R.drawable.faction_monsters, R.drawable.faction_monsters_large),
 
-    NEUTRAL("Neutral", R.color.colorPrimary, R.color.colorPrimaryDark,
+    NEUTRAL("Neutral", R.color.color_neutral, R.color.color_neutral_status_bar,
             R.drawable.faction_monsters, R.drawable.faction_monsters_large),
 
     NIFLGAARD("Nilfgaard", R.color.color_nilfgaard, R.color.color_nilfgaard_status_bar,
@@ -46,22 +49,26 @@ public enum Faction {
     private int drawableIcon;
     private int drawableIconLarge;
 
-    public String getName() {
+    public String getUiName() {
         return uiName;
     }
 
+    @ColorInt
     public int getColorTab() {
         return colorTab;
     }
 
+    @ColorInt
     public int getColorStatusBar() {
         return colorStatusBar;
     }
 
+    @DrawableRes
     public int getDrawableIcon() {
         return drawableIcon;
     }
 
+    @DrawableRes
     public int getDrawableIconLarge() {
         return drawableIconLarge;
     }

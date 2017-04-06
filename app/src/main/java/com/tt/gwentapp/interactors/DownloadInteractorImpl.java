@@ -47,6 +47,6 @@ public class DownloadInteractorImpl implements DownloadInteractor {
      */
     @Override
     public Observable<String> getLatestDbVersion() {
-        return Observable.just(LATEST_DB_VERSION).delay(2000, TimeUnit.MILLISECONDS);
+        return Observable.just(LATEST_DB_VERSION).delay(1000, TimeUnit.MILLISECONDS);
     }
 }

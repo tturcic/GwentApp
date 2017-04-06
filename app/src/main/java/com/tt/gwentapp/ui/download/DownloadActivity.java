@@ -46,7 +46,6 @@ public class DownloadActivity extends BaseActivity implements DownloadView {
                 .appComponent(App.getApp(this).getAppComponent())
                 .downloadActivityModule(new DownloadActivityModule(this))
                 .build().inject(this);
-
         presenter.getContent();
     }
 

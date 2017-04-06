@@ -4,6 +4,10 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
 
+    <color name="color_all">@color/color_neutral</color>
+    <color name="color_all_status_bar">@color/color_neutral_status_bar</color>
+    <color name="color_neutral">#5F4C2B</color>
+    <color name="color_neutral_status_bar">#463820</color>
     <color name="color_monsters">#A30806</color>
     <color name="color_monsters_status_bar">#8e0a08</color>
     <color name="color_nilfgaard">#343B43</color>

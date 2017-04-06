@@ -3,13 +3,14 @@ package com.tt.gwentapp.data.local;
 import com.tt.gwentapp.models.Card;
 import com.tt.gwentapp.models.Faction;
 import com.tt.gwentapp.models.Rarity;
+import com.tt.gwentapp.models.SortOrder;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import io.realm.Realm;
 import io.realm.RealmQuery;
 import io.realm.RealmResults;
-import io.realm.Sort;
 
 /**
  * @author tturcic
@@ -31,60 +32,39 @@ public class RealmDatabase implements CardDatabase {
     }
 
     @Override
-    public List<Card> getCardsForFaction(Faction faction) {
-        return realm.where(Card.class).equalTo("faction", getFactionName(faction)).findAll();
+    public List<Card> getCards(Faction faction, SortOrder sortOrder, List<Rarity> rarities) {
+        RealmResults<Card> allCards = realm.where(Card.class).findAll();
+        RealmQuery<Card> query = allCards.where();
+        RealmResults<Card> factionQuery = query.equalTo("faction", getFactionName(faction)).findAllSorted("name");
+
+        // Sort rarities in a specific order
+        List<Card> cardsList = new ArrayList<>();
+        if(rarities.contains(Rarity.COMMON)) {
+            RealmResults<Card> res = factionQuery.where().equalTo("rarity", Card.RarityName.COMMON).findAll();
+            cardsList.addAll(res);
+        }
+
+        if(rarities.contains(Rarity.RARE)) {
+            RealmResults<Card> res = factionQuery.where().equalTo("rarity", Card.RarityName.RARE).findAll();
+            cardsList.addAll(res);
+        }
+
+        if(rarities.contains(Rarity.EPIC)) {
+            RealmResults<Card> res = factionQuery.where().equalTo("rarity", Card.RarityName.EPIC).findAll();
+            cardsList.addAll(res);
+        }
+
+        if(rarities.contains(Rarity.LEGENDARY)) {
+            RealmResults<Card> res = factionQuery.where().equalTo("rarity", Card.RarityName.LEGENDARY).findAll();
+            cardsList.addAll(res);
+        }
+
+        return cardsList;
     }
 
     @Override
-    public List<Card> getCards(CardFilter cardFilter) {
-        RealmResults<Card> allCards = realm.where(Card.class).findAll();
-        RealmQuery<Card> query = allCards.where();
-
-        if(cardFilter.getFactions() != null){
-            String[] factions = new String[cardFilter.getFactions().length];
-            for (int i = 0; i < cardFilter.getFactions().length; i++) {
-                factions[i] = getFactionName(cardFilter.getFactions()[i]);
-            }
-            query = query.in("faction", factions);
-        }
-
-        if(cardFilter.getRarities() != null){
-            String[] rarities = new String[cardFilter.getRarities().length];
-            for (int i = 0; i < cardFilter.getRarities().length; i++) {
-                rarities[i] = getRarityName(cardFilter.getRarities()[i]);
-            }
-            query = query.in("rarity", rarities);
-        }
-
-        switch (cardFilter.getSortOrder()){
-            case NAME_DESC:
-                return query.findAllSorted("name", Sort.DESCENDING);
-            case FACTION_ASC:
-                return query.findAllSorted("faction", Sort.ASCENDING);
-            case FACTION_DESC:
-                return query.findAllSorted("faction", Sort.DESCENDING);
-            case RARITY_ASC:
-                return query.findAllSorted("rarity", Sort.ASCENDING);
-            case RARITY_DESC:
-                return query.findAllSorted("rarity", Sort.DESCENDING);
-            case NAME_ASC:
-            default:
-                return query.findAllSorted("name", Sort.ASCENDING);
-        }
-    }
-
-    private String getRarityName(Rarity rarity) {
-        switch (rarity) {
-            case COMMON:
-                return "common";
-            case RARE:
-                return "rare";
-            case EPIC:
-                return "epic";
-            case LEGENDARY:
-            default:
-                return "legendary";
-        }
+    public Card getCard(String name) {
+        return realm.where(Card.class).equalTo("name", name).findFirst();
     }
 
     private String getFactionName(Faction faction){

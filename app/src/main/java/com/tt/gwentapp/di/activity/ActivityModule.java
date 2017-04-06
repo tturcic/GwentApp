@@ -20,17 +20,17 @@ import io.realm.Realm;
 @Module
 public class ActivityModule {
 
-    /*private AppCompatActivity activity;
+    private Activity activity;
 
-    public ActivityModule(AppCompatActivity activity) {
+    public ActivityModule(Activity activity) {
         this.activity = activity;
     }
 
     @ActivityScope
     @Provides
-    AppCompatActivity provideActivity(){
+    Activity provideActivity(){
         return activity;
-    }*/
+    }
 
     @ActivityScope
     @Provides

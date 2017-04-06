@@ -4,21 +4,17 @@ import com.tt.gwentapp.models.Card;
 import com.tt.gwentapp.models.Faction;
 import com.tt.gwentapp.ui.details.CardDetailsView;
 
-import io.realm.Realm;
-
 /**
  * @author tturcic
  *         \date 27.3.2017.
  */
 public class CardDetailsPresenter extends BasePresenter<CardDetailsView> {
 
-    private final Realm realm;
     private Card card;
 
-    public CardDetailsPresenter(CardDetailsView view, Realm realm, String cardName) {
+    public CardDetailsPresenter(CardDetailsView view, Card card) {
         super(view);
-        this.realm = realm;
-        this.card = realm.where(Card.class).equalTo("name", cardName).findFirst();
+        this.card = card;
     }
 
     public void subscribe() {
@@ -33,9 +29,4 @@ public class CardDetailsPresenter extends BasePresenter<CardDetailsView> {
         view.setStatusBarColor(faction.getColorStatusBar());
     }
 
-    @Override
-    public void unsubscribe() {
-        super.unsubscribe();
-        realm.close();
-    }
 }

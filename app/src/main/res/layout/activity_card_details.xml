@@ -46,13 +46,13 @@
 
                 <ImageView
                     android:id="@+id/imgCardDetails"
-                    android:layout_width="250dp"
+                    android:layout_width="220dp"
                     android:layout_height="350dp"
+                    android:layout_marginTop="-30dp"
+                    android:layout_marginLeft="-15dp"
+                    android:rotation="5"
                     android:adjustViewBounds="true"
                     android:contentDescription="@null"
-                    android:paddingBottom="30dp"
-                    android:paddingRight="50dp"
-                    android:rotation="5"
                     android:src="@drawable/adrenaline_rush" />
 
             </FrameLayout>

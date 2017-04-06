@@ -62,6 +62,7 @@ public class CardHorizontalAdapter extends RecyclerView.Adapter<CardHorizontalAd
         @BindView(R.id.imgCard) ImageView imgCard;
         @BindView(R.id.txtCardDescription) TextView txtCardDescription;
         @BindView(R.id.txtCardName) TextView txtCardName;
+        @BindView(R.id.imgRarity) ImageView imgRarity;
 
         ViewHolder(View itemView) {
             super(itemView);
@@ -74,6 +75,8 @@ public class CardHorizontalAdapter extends RecyclerView.Adapter<CardHorizontalAd
                     .placeholder(card.getFactionEnum().getDrawableIcon())
                     .error(card.getFactionEnum().getDrawableIcon())
                     .into(imgCard);
+
+            imgRarity.setImageResource(card.getRarityEnum().getIcon());
 
             txtCardDescription.setText(card.getText());
             txtCardName.setText(card.getName());

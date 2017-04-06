@@ -155,6 +155,22 @@ public class Card extends RealmObject {
         }
     }
 
+    public Rarity getRarityEnum(){
+        switch (rarity){
+            case RarityName.COMMON:
+                return Rarity.COMMON;
+            case RarityName.RARE:
+                return Rarity.RARE;
+            case RarityName.EPIC:
+                return Rarity.EPIC;
+            default:
+                return Rarity.LEGENDARY;
+        }
+    }
+
+    /**
+     * These correspond to database values.
+     */
     public static class FactionName {
 
         public static final String MONSTERS = "monsters";
@@ -163,6 +179,18 @@ public class Card extends RealmObject {
         public static final String NORTHERN_REALMS = "northern realms";
         public static final String SCOIA_TAEL = "scoia'tael";
         public static final String SKELLIGE = "skellige";
+
+    }
+
+    /**
+     * These correspond to database values.
+     */
+    public static class RarityName {
+
+        public static final String COMMON = "common";
+        public static final String RARE = "rare";
+        public static final String EPIC = "epic";
+        public static final String LEGENDARY = "legendary";
 
     }
 }

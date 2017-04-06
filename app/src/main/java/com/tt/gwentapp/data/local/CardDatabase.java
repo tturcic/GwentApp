@@ -2,6 +2,8 @@ package com.tt.gwentapp.data.local;
 
 import com.tt.gwentapp.models.Card;
 import com.tt.gwentapp.models.Faction;
+import com.tt.gwentapp.models.Rarity;
+import com.tt.gwentapp.models.SortOrder;
 
 import java.util.List;
 
@@ -13,9 +15,9 @@ public interface CardDatabase {
 
     void saveCardsToDatabase(List<Card> cards);
 
-    List<Card> getCardsForFaction(Faction faction);
+    List<Card> getCards(Faction faction, SortOrder sortOrder, List<Rarity> rarities);
 
-    List<Card> getCards(CardFilter cardFilter);
+    Card getCard(String name);
 
     void close();
 

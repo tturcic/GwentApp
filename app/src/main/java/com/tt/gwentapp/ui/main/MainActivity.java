@@ -52,8 +52,4 @@ public class MainActivity extends BaseActivity implements CardView {
         return component;
     }
 
-    @Override
-    public void showCards(List<Card> cards) {
-
-    }
 }

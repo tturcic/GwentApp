@@ -1,6 +1,5 @@
 package com.tt.gwentapp.ui.main;
 
-import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -8,7 +7,6 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
-import android.util.SparseArray;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -18,15 +16,12 @@ import com.tt.gwentapp.di.activity.CardActivityComponent;
 import com.tt.gwentapp.di.activity.CardActivityModule;
 import com.tt.gwentapp.di.activity.DaggerCardActivityComponent;
 import com.tt.gwentapp.listeners.ColorChangePageScrollListener;
-import com.tt.gwentapp.models.Card;
 import com.tt.gwentapp.models.Faction;
 import com.tt.gwentapp.presentation.CardPresenter;
 import com.tt.gwentapp.ui.BaseActivity;
 import com.tt.gwentapp.ui.adapters.MainTabAdapter;
-import com.tt.gwentapp.ui.cards.CardFragment;
+import com.tt.gwentapp.ui.cards.CardFilterDialog;
 import com.tt.gwentapp.ui.cards.CardView;
-
-import java.util.List;
 
 import javax.inject.Inject;
 
@@ -87,48 +82,14 @@ public class MainTabActivity extends BaseActivity implements CardView {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        item.setChecked(!item.isChecked());
-        SparseArray<CardFragment> cardsFragments = mainTabAdapter.getCardFragments();
-        switch (item.getItemId()){
-            case R.id.menuCheckCommon:
-                for(int i = 0; i <cardsFragments.size(); i++) {
-                    CardFragment fragment  = cardsFragments.valueAt(i);
-                    //if(fragment != null)
-                      //  fragment.onRarityCommonCheckedChanged(item.isChecked());
-                }
-                break;
-            case R.id.menuCheckRare:
-                for(int i = 0; i <cardsFragments.size(); i++) {
-                    CardFragment fragment = cardsFragments.valueAt(i);
-                    //if (fragment != null)
-                      //  fragment.onRarityRareCheckedChanged(item.isChecked());
-                }
-                break;
-            case R.id.menuCheckEpic:
-                for(int i = 0; i <cardsFragments.size(); i++) {
-                    CardFragment fragment = cardsFragments.valueAt(i);
-                    //if (fragment != null)
-                      //  fragment.onRarityEpicCheckedChanged(item.isChecked());
-                }
-                break;
-            case R.id.menuCheckLegendary:
-                for(int i = 0; i <cardsFragments.size(); i++) {
-                    CardFragment fragment = cardsFragments.valueAt(i);
-                    //if (fragment != null)
-                      //  fragment.onRarityLegendaryCheckedChanged(item.isChecked());
-                }
-                break;
+        if(item.getItemId() == R.id.menu_filter_rarity){
+            new CardFilterDialog().show(getSupportFragmentManager(), CardFilterDialog.TAG);
         }
         return false;
     }
 
-    @Override
-    public void showCards(List<Card> cards) {
-
-    }
-
-
     public CardActivityComponent getComponent() {
         return component;
     }
+
 }

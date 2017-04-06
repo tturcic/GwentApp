@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="3dp"
-    android:foreground="?android:attr/selectableItemBackground"
-    android:layout_marginTop="3dp">
+    android:layout_marginTop="3dp"
+    android:foreground="?android:attr/selectableItemBackground">
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
@@ -14,7 +15,21 @@
             android:id="@+id/imgCard"
             android:layout_width="75dp"
             android:layout_height="100dp"
-            android:contentDescription="@null" />
+            android:contentDescription="@null"
+            tools:src="@drawable/adrenaline_rush" />
+
+        <ImageView
+            android:id="@+id/imgRarity"
+            android:layout_width="12dp"
+            android:layout_height="12dp"
+            android:layout_alignBottom="@id/imgCard"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="3dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:contentDescription="@null"
+            tools:src="@drawable/ic_rarity_common" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -22,7 +37,9 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:layout_toEndOf="@id/imgCard"
+            android:layout_toLeftOf="@id/imgRarity"
             android:layout_toRightOf="@id/imgCard"
+            android:layout_toStartOf="@id/imgRarity"
             android:gravity="center_vertical"
             android:orientation="vertical">
 

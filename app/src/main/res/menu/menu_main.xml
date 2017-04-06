@@ -1,33 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <group
-        android:id="@+id/menuGroupRarities"
-        android:checkableBehavior="all">
-        <item
-            android:id="@+id/menuCheckCommon"
-            android:checkable="true"
-            android:checked="true"
-            android:title="Common" />
-
-        <item
-            android:id="@+id/menuCheckRare"
-            android:checkable="true"
-            android:checked="true"
-            android:title="Rare" />
-
-        <item
-            android:id="@+id/menuCheckEpic"
-            android:checkable="true"
-            android:checked="true"
-            android:title="Epic" />
-
-        <item
-            android:id="@+id/menuCheckLegendary"
-            android:checkable="true"
-            android:checked="true"
-            android:title="Legendary" />
-
-    </group>
+    <item android:title="Filter by rarity"
+        android:id="@+id/menu_filter_rarity"/>
 
 </menu>

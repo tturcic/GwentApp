@@ -8,24 +8,21 @@ import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.resource.drawable.GlideDrawable;
-import com.bumptech.glide.request.RequestListener;
-import com.bumptech.glide.request.target.Target;
 import com.tt.gwentapp.App;
 import com.tt.gwentapp.R;
+import com.tt.gwentapp.di.activity.ActivityModule;
+import com.tt.gwentapp.di.activity.CardDetailsModule;
+import com.tt.gwentapp.di.activity.DaggerCardDetailsComponent;
 import com.tt.gwentapp.presentation.CardDetailsPresenter;
 import com.tt.gwentapp.ui.BaseActivity;
-import com.tt.gwentapp.utils.GlideUtils;
 
 import javax.inject.Inject;
 
 import butterknife.BindView;
-import io.realm.Realm;
 
 /**
  * @author tturcic
@@ -33,7 +30,7 @@ import io.realm.Realm;
  */
 public class CardDetailsActivity extends BaseActivity implements CardDetailsView {
 
-    private static final String EXTRA_CARD_NAME = "cardName";
+    public static final String EXTRA_CARD_NAME = "cardName";
 
     @BindView(R.id.toolbar) Toolbar toolbar;
     @BindView(R.id.imgCardDetails) ImageView imgCardDetails;
@@ -42,8 +39,7 @@ public class CardDetailsActivity extends BaseActivity implements CardDetailsView
     @BindView(R.id.txtCardName) TextView txtCardName;
     @BindView(R.id.txtCardFlavour) TextView txtCardFlavour;
 
-    @Inject Realm realm;
-    private CardDetailsPresenter presenter;
+    @Inject CardDetailsPresenter presenter;
 
     @Override
     protected int getLayoutResId() {
@@ -62,8 +58,13 @@ public class CardDetailsActivity extends BaseActivity implements CardDetailsView
             getSupportActionBar().setTitle("Card details");
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
-        App.getApp(this).getAppComponent().inject(this);
-        presenter = new CardDetailsPresenter(this, realm, getIntent().getStringExtra(EXTRA_CARD_NAME));
+
+        DaggerCardDetailsComponent.builder()
+                .appComponent(App.getApp(this).getAppComponent())
+                .activityModule(new ActivityModule(this))
+                .cardDetailsModule(new CardDetailsModule(this))
+                .build().inject(this);
+
         presenter.subscribe();
     }
 

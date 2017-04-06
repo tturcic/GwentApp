@@ -27,7 +27,9 @@ import butterknife.BindView;
  * @author tturcic
  *         \date 26.3.2017.
  */
-public class CardFragment extends BaseFragment implements ItemClickListener<Card> {
+public class CardFragment extends BaseFragment implements ItemClickListener<Card>, CardListView {
+
+    private static final String KEY_FACTION = "faction";
 
     @BindView(R.id.recyclerView) EmptyRecyclerView recyclerView;
     @BindView(R.id.txtEmptyList) TextView txtEmptyList;
@@ -38,7 +40,7 @@ public class CardFragment extends BaseFragment implements ItemClickListener<Card
 
     public static CardFragment newInstance(Faction faction) {
         Bundle args = new Bundle();
-        args.putInt("faction", faction.ordinal());
+        args.putInt(KEY_FACTION, faction.ordinal());
         CardFragment fragment = new CardFragment();
         fragment.setArguments(args);
         return fragment;
@@ -53,11 +55,20 @@ public class CardFragment extends BaseFragment implements ItemClickListener<Card
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ((MainTabActivity)getActivity()).getComponent().inject(this);
-        faction = Faction.values()[getArguments().getInt("faction")];
+
+        faction = Faction.values()[getArguments().getInt(KEY_FACTION)];
+
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setEmptyView(txtEmptyList);
         recyclerView.setAdapter(adapter = new CardHorizontalAdapter(this));
-        adapter.updateCards(presenter.getCards(faction));
+
+        presenter.registerCardListView(this);
+    }
+
+    @Override
+    public void onDestroyView() {
+        presenter.unregisterCardListView(this);
+        super.onDestroyView();
     }
 
     @Override
@@ -65,9 +76,14 @@ public class CardFragment extends BaseFragment implements ItemClickListener<Card
         getActivity().startActivity(CardDetailsActivity.createCardDetailsIntent(getActivity(), item.getName()));
     }
 
-    public void updateCards(List<Card> cards){
-        adapter.updateCards(cards);
+
+    @Override
+    public Faction getFaction() {
+        return faction;
     }
 
-
+    @Override
+    public void setCards(List<Card> cards) {
+        adapter.updateCards(cards);
+    }
 }
