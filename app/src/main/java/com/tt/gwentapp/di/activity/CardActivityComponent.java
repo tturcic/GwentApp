@@ -1,6 +1,6 @@
 package com.tt.gwentapp.di.activity;
 
-import com.tt.gwentapp.di.AppComponent;
+import com.tt.gwentapp.di.application.AppComponent;
 import com.tt.gwentapp.ui.cards.CardFilterDialog;
 import com.tt.gwentapp.ui.cards.CardFragment;
 import com.tt.gwentapp.ui.main.MainActivity;

@@ -21,4 +21,7 @@
     <!-- Card filter dialog -->
     <string name="card_filter_dialog_title">Filter cards by rarity:</string>
 
+    <!-- Card details activity -->
+    <string name="card_details_strength_formatted">%1$s | STRENGTH</string>
+
 </resources>

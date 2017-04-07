@@ -3,9 +3,9 @@ package com.tt.gwentapp;
 import android.app.Application;
 import android.content.Context;
 
-import com.tt.gwentapp.di.AppComponent;
-import com.tt.gwentapp.di.AppModule;
-import com.tt.gwentapp.di.DaggerAppComponent;
+import com.tt.gwentapp.di.application.AppComponent;
+import com.tt.gwentapp.di.application.AppModule;
+import com.tt.gwentapp.di.application.DaggerAppComponent;
 
 /**
  * @author tturcic

@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical">
 
-    <include layout="@layout/toolbar"/>
+    <include layout="@layout/toolbar" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -20,61 +19,115 @@
             android:orientation="vertical"
             android:padding="10dp">
 
-            <FrameLayout
-                android:id="@+id/cardLayout"
-                android:layout_width="225dp"
-                android:layout_height="300dp"
-                android:clipChildren="false">
-
-                <ImageView
-                    android:id="@+id/imgFaction1"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:contentDescription="@null"
-                    android:padding="25dp"
-                    android:rotation="12"
-                    android:src="@drawable/faction_monsters_large" />
-
-                <ImageView
-                    android:id="@+id/imgFaction2"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:contentDescription="@null"
-                    android:padding="25dp"
-                    android:rotation="-12"
-                    android:src="@drawable/faction_monsters_large" />
-
-                <ImageView
-                    android:id="@+id/imgCardDetails"
-                    android:layout_width="220dp"
-                    android:layout_height="350dp"
-                    android:layout_marginTop="-30dp"
-                    android:layout_marginLeft="-15dp"
-                    android:rotation="5"
-                    android:adjustViewBounds="true"
-                    android:contentDescription="@null"
-                    android:src="@drawable/adrenaline_rush" />
-
-            </FrameLayout>
-
             <TextView
                 android:id="@+id/txtCardName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:textSize="18sp"
+                android:layout_marginBottom="10dp"
+                android:textSize="20sp"
                 android:textStyle="bold"
-                tools:text="Geralt" />
+                tools:text="Card name" />
 
             <TextView
-                android:id="@+id/txtCardFlavour"
+                android:id="@+id/txtStrength"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:layout_marginBottom="10dp"
+                android:textStyle="bold"
+                android:gravity="center"
+                tools:text="5 | Strength" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/text_box"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <FrameLayout
+                    android:id="@+id/cardLayout"
+                    android:layout_width="225dp"
+                    android:layout_height="300dp"
+                    android:clipChildren="false">
+
+                    <ImageView
+                        android:id="@+id/imgFaction1"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:contentDescription="@null"
+                        android:padding="25dp"
+                        android:rotation="-12"
+                        android:src="@drawable/faction_monsters_large" />
+
+                    <ImageView
+                        android:id="@+id/imgFaction2"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:contentDescription="@null"
+                        android:padding="25dp"
+                        android:rotation="12"
+                        android:src="@drawable/faction_monsters_large" />
+
+                    <ImageView
+                        android:id="@+id/imgCardDetails"
+                        android:layout_width="220dp"
+                        android:layout_height="350dp"
+                        android:layout_marginLeft="-15dp"
+                        android:layout_marginTop="-35dp"
+                        android:adjustViewBounds="true"
+                        android:contentDescription="@null"
+                        android:rotation="5"
+                        android:src="@drawable/adrenaline_rush" />
+
+                    <ProgressBar
+                        android:id="@+id/progressBar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center" />
+
+                </FrameLayout>
+
+                <TextView
+                    android:id="@+id/txtTags"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:lineSpacingExtra="8dp"
+                    android:padding="10dp"
+                    android:textAllCaps="true"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    tools:text="Siege\nLoyal" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/txtDescription"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:gravity="center"
                 android:textSize="17sp"
+                tools:text="Description text goes here" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/color_neutral" />
+
+            <TextView
+                android:id="@+id/txtCardFlavour"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="17sp"
                 android:textStyle="italic"
-                tools:text="Geralt" />
+                tools:text="Flavour text goes here" />
 
         </LinearLayout>
 

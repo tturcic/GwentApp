@@ -18,7 +18,11 @@ public interface CardDetailsView extends BaseView {
 
     void setCardName(String name);
 
-    void setCardDescription(String desc);
-
     void setCardFlavour(String flavour);
+
+    void setCardStrength(String strength);
+
+    void setCardTags(String tag);
+
+    void setCardDescription(String desc);
 }

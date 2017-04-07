@@ -1,6 +1,4 @@
-package com.tt.gwentapp.di;
-
-import android.content.Context;
+package com.tt.gwentapp.di.application;
 
 import com.tt.gwentapp.App;
 import com.tt.gwentapp.data.local.PrefsManager;
@@ -34,5 +32,11 @@ public class AppModule {
     @Singleton
     static PrefsManager providePrefsManager(App app){
         return new PrefsManagerImpl(app);
+    }
+
+    @Provides
+    @Singleton
+    static FontManager provideFontManager(App app){
+        return new FontManager(app);
     }
 }

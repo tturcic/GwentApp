@@ -1,6 +1,6 @@
 package com.tt.gwentapp.di.activity;
 
-import com.tt.gwentapp.di.AppComponent;
+import com.tt.gwentapp.di.application.AppComponent;
 import com.tt.gwentapp.ui.download.DownloadActivity;
 
 import dagger.Component;

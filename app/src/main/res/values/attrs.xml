@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Make sure to update FontManager with any additional fonts that are added here! -->
+    <declare-styleable name="FontTextView">
+        <attr name="font" format="reference">
+            <enum name="Morpheus" value="0"/>
+        </attr>
+    </declare-styleable>
+
+
+</resources>

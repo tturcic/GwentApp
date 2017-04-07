@@ -1,4 +1,4 @@
-package com.tt.gwentapp.di;
+package com.tt.gwentapp.di.application;
 
 import com.tt.gwentapp.App;
 import com.tt.gwentapp.data.local.PrefsManager;
@@ -6,6 +6,7 @@ import com.tt.gwentapp.data.local.RealmModule;
 import com.tt.gwentapp.data.remote.ApiModule;
 import com.tt.gwentapp.data.remote.ApiService;
 import com.tt.gwentapp.data.remote.RxTransformer;
+import com.tt.gwentapp.ui.custom_views.FontTextView;
 
 import javax.inject.Singleton;
 
@@ -26,5 +27,7 @@ public interface AppComponent {
     Realm getRealm();
 
     void inject(App app);
+
+    void inject(FontTextView fontTextView);
 
 }

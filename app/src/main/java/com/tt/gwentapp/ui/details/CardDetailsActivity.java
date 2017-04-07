@@ -7,11 +7,17 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.drawable.GlideDrawable;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 import com.tt.gwentapp.App;
 import com.tt.gwentapp.R;
 import com.tt.gwentapp.di.activity.ActivityModule;
@@ -37,7 +43,11 @@ public class CardDetailsActivity extends BaseActivity implements CardDetailsView
     @BindView(R.id.imgFaction1) ImageView imgFaction1;
     @BindView(R.id.imgFaction2) ImageView imgFaction2;
     @BindView(R.id.txtCardName) TextView txtCardName;
+    @BindView(R.id.progressBar) ProgressBar progressBar;
     @BindView(R.id.txtCardFlavour) TextView txtCardFlavour;
+    @BindView(R.id.txtStrength) TextView txtStrength;
+    @BindView(R.id.txtTags) TextView txtTags;
+    @BindView(R.id.txtDescription) TextView txtDescription;
 
     @Inject CardDetailsPresenter presenter;
 
@@ -83,8 +93,23 @@ public class CardDetailsActivity extends BaseActivity implements CardDetailsView
 
     @Override
     public void loadImage(String url) {
+        progressBar.setVisibility(View.VISIBLE);
          Glide.with(this)
                 .load(url)
+                 .crossFade()
+                 .listener(new RequestListener<String, GlideDrawable>() {
+                     @Override
+                     public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
+                         progressBar.setVisibility(View.INVISIBLE);
+                         return false;
+                     }
+
+                     @Override
+                     public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
+                         progressBar.setVisibility(View.INVISIBLE);
+                         return false;
+                     }
+                 })
                 .into(imgCardDetails);
     }
 
@@ -113,11 +138,30 @@ public class CardDetailsActivity extends BaseActivity implements CardDetailsView
 
     @Override
     public void setCardDescription(String desc) {
-
+        txtDescription.setText(desc);
     }
 
     @Override
     public void setCardFlavour(String flavour) {
-        txtCardFlavour.setText(flavour);
+        if(TextUtils.isEmpty(flavour))
+            txtCardFlavour.setVisibility(View.GONE);
+        else
+            txtCardFlavour.setText(flavour);
+    }
+
+    @Override
+    public void setCardStrength(String strength) {
+        if(TextUtils.isEmpty(strength))
+            txtStrength.setVisibility(View.GONE);
+        else
+            txtStrength.setText(String.format(getString(R.string.card_details_strength_formatted), strength));
+    }
+
+    @Override
+    public void setCardTags(String tag) {
+        if(TextUtils.isEmpty(tag))
+            txtTags.setVisibility(View.GONE);
+        else
+            txtTags.setText(tag);
     }
 }
