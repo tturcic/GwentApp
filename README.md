@@ -3,7 +3,7 @@
 ## Synopsis
 
 A sample project based on MVP, Dagger 2 for Dependency Injection, Retrofit (comboed with Rx) for Networking and Realm database.
-Uses on open source API to fetch data, store it in database and present to the user.
+Uses an open source API to fetch data, store it in the database and present it to the user.
 
 ## Motivation
 
