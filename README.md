@@ -1,3 +1,5 @@
+![alt text](gwent_app_img.jpg "App screenshot")
+
 ## Synopsis
 
 A sample project based on MVP, Dagger 2 for Dependency Injection, Retrofit (comboed with Rx) for Networking and Realm database.
