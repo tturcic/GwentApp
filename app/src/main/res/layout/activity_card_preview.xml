@@ -3,17 +3,32 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:clipChildren="false"
+    android:gravity="center_horizontal"
     android:orientation="vertical">
 
-    <include layout="@layout/toolbar"/>
+    <include layout="@layout/toolbar" />
 
-    <ImageView
-        android:id="@+id/imgCardPreview"
-        android:layout_width="wrap_content"
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:contentDescription="@null"
-        android:padding="20dp"
-        tools:src="@drawable/adrenaline_rush" />
+        android:indeterminate="true"
+        android:visibility="invisible" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/imgCardPreview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:contentDescription="@null"
+            android:padding="20dp"
+            tools:src="@drawable/adrenaline_rush" />
+
+    </FrameLayout>
 
 </LinearLayout>

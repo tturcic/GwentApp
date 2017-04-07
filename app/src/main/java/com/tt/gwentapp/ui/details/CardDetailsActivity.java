@@ -144,8 +144,8 @@ public class CardDetailsActivity extends BaseActivity implements CardDetailsView
     }
 
     @Override
-    public void navigateToCardPreview(String imgUrl) {
-        startActivity(CardPreviewActivity.createCardPreviewActivity(this, imgUrl));
+    public void navigateToCardPreview(String cardName, String imgUrl) {
+        startActivity(CardPreviewActivity.createCardPreviewActivity(this, cardName, imgUrl));
     }
 
     @Override

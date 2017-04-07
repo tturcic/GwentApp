@@ -36,7 +36,7 @@ public class CardDetailsPresenter extends BasePresenter<CardDetailsView> {
 
     public void onCardImageClicked(){
         if(!card.getImage().isEmpty())
-            view.navigateToCardPreview(card.getImage());
+            view.navigateToCardPreview(card.getName(), card.getImage());
     }
 
 }

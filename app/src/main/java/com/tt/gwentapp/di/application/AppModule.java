@@ -3,6 +3,7 @@ package com.tt.gwentapp.di.application;
 import com.tt.gwentapp.App;
 import com.tt.gwentapp.data.local.PrefsManager;
 import com.tt.gwentapp.data.local.PrefsManagerImpl;
+import com.tt.gwentapp.utils.ImageProcessor;
 
 import javax.inject.Singleton;
 
@@ -38,5 +39,11 @@ public class AppModule {
     @Singleton
     static FontManager provideFontManager(App app){
         return new FontManager(app);
+    }
+
+    @Singleton
+    @Provides
+    static ImageProcessor provideImageProcessor(){
+        return new ImageProcessor();
     }
 }

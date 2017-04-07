@@ -7,6 +7,7 @@ import com.tt.gwentapp.data.remote.ApiModule;
 import com.tt.gwentapp.data.remote.ApiService;
 import com.tt.gwentapp.data.remote.RxTransformer;
 import com.tt.gwentapp.ui.custom_views.FontTextView;
+import com.tt.gwentapp.ui.details.CardPreviewActivity;
 
 import javax.inject.Singleton;
 
@@ -27,6 +28,8 @@ public interface AppComponent {
     Realm getRealm();
 
     void inject(App app);
+
+    void inject(CardPreviewActivity cardPreviewActivity);
 
     void inject(FontTextView fontTextView);
 
