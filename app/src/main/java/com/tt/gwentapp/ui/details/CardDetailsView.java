@@ -25,4 +25,6 @@ public interface CardDetailsView extends BaseView {
     void setCardTags(String tag);
 
     void setCardDescription(String desc);
+
+    void navigateToCardPreview(String imgUrl);
 }

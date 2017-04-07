@@ -15,7 +15,7 @@ import rx.Observable;
  */
 public class DownloadInteractorImpl implements DownloadInteractor {
 
-    public static final String LATEST_DB_VERSION = "1.02";
+    public static final String LATEST_DB_VERSION = "1.03";
 
     private final ApiService apiService;
 

@@ -19,7 +19,8 @@ public class CardDetailsPresenter extends BasePresenter<CardDetailsView> {
     }
 
     public void subscribe() {
-        view.loadImage(card.getImage());
+        if(!card.getImage().isEmpty())
+            view.loadImage(card.getImage());
         view.setCardDescription(card.getText());
         view.setCardFlavour(card.getFlavor());
         view.setCardName(card.getName());
@@ -31,7 +32,11 @@ public class CardDetailsPresenter extends BasePresenter<CardDetailsView> {
         view.setFactionImage(faction.getDrawableIconLarge());
         view.setToolbarColor(faction.getColorTab());
         view.setStatusBarColor(faction.getColorStatusBar());
+    }
 
+    public void onCardImageClicked(){
+        if(!card.getImage().isEmpty())
+            view.navigateToCardPreview(card.getImage());
     }
 
 }

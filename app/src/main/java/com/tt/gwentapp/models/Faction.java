@@ -15,13 +15,13 @@ import com.tt.gwentapp.R;
 public enum Faction {
 
     ALL("All", R.color.color_all, R.color.color_all_status_bar,
-            R.drawable.faction_monsters, R.drawable.faction_monsters_large),
+            R.drawable.faction_neutral, R.drawable.faction_neutral),
 
     MONSTERS("Monsters", R.color.color_monsters, R.color.color_monsters_status_bar,
             R.drawable.faction_monsters, R.drawable.faction_monsters_large),
 
     NEUTRAL("Neutral", R.color.color_neutral, R.color.color_neutral_status_bar,
-            R.drawable.faction_monsters, R.drawable.faction_monsters_large),
+            R.drawable.faction_neutral, R.drawable.faction_neutral),
 
     NIFLGAARD("Nilfgaard", R.color.color_nilfgaard, R.color.color_nilfgaard_status_bar,
             R.drawable.faction_nilfgaard, R.drawable.faction_nilfgaard_large),

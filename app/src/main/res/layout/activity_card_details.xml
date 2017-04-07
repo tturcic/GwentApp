@@ -78,12 +78,13 @@
                         android:adjustViewBounds="true"
                         android:contentDescription="@null"
                         android:rotation="5"
-                        android:src="@drawable/adrenaline_rush" />
+                        tools:src="@drawable/adrenaline_rush" />
 
                     <ProgressBar
                         android:id="@+id/progressBar"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:visibility="invisible"
                         android:layout_gravity="center" />
 
                 </FrameLayout>

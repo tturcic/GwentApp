@@ -29,6 +29,7 @@ import com.tt.gwentapp.ui.BaseActivity;
 import javax.inject.Inject;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 /**
  * @author tturcic
@@ -36,6 +37,7 @@ import butterknife.BindView;
  */
 public class CardDetailsActivity extends BaseActivity implements CardDetailsView {
 
+    //region Fields
     public static final String EXTRA_CARD_NAME = "cardName";
 
     @BindView(R.id.toolbar) Toolbar toolbar;
@@ -50,7 +52,9 @@ public class CardDetailsActivity extends BaseActivity implements CardDetailsView
     @BindView(R.id.txtDescription) TextView txtDescription;
 
     @Inject CardDetailsPresenter presenter;
+    //endregion
 
+    //region Lifecycle
     @Override
     protected int getLayoutResId() {
         return R.layout.activity_card_details;
@@ -63,11 +67,7 @@ public class CardDetailsActivity extends BaseActivity implements CardDetailsView
 
     @Override
     protected void setupUI(Bundle savedInstanceState) {
-        setSupportActionBar(toolbar);
-        if(getSupportActionBar() != null){
-            getSupportActionBar().setTitle("Card details");
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        }
+        setupToolbar();
 
         DaggerCardDetailsComponent.builder()
                 .appComponent(App.getApp(this).getAppComponent())
@@ -84,32 +84,34 @@ public class CardDetailsActivity extends BaseActivity implements CardDetailsView
             finish();
         return super.onOptionsItemSelected(item);
     }
+    //endregion
 
-    public static Intent createCardDetailsIntent(Context context, String selectedCardName){
-        Intent intent = new Intent(context, CardDetailsActivity.class);
-        intent.putExtra(EXTRA_CARD_NAME, selectedCardName);
-        return intent;
+    @OnClick(R.id.imgCardDetails) void onClick(){
+        presenter.onCardImageClicked();
     }
 
+    //region Implemented methods
     @Override
     public void loadImage(String url) {
         progressBar.setVisibility(View.VISIBLE);
-         Glide.with(this)
+        Glide.with(this)
                 .load(url)
-                 .crossFade()
-                 .listener(new RequestListener<String, GlideDrawable>() {
-                     @Override
-                     public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
-                         progressBar.setVisibility(View.INVISIBLE);
-                         return false;
-                     }
+                .crossFade()
+                .listener(new RequestListener<String, GlideDrawable>() {
+                    @Override
+                    public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
+                        progressBar.setVisibility(View.INVISIBLE);
+                        imgCardDetails.setEnabled(false);
+                        return false;
+                    }
 
-                     @Override
-                     public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
-                         progressBar.setVisibility(View.INVISIBLE);
-                         return false;
-                     }
-                 })
+                    @Override
+                    public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
+                        progressBar.setVisibility(View.INVISIBLE);
+                        imgCardDetails.setEnabled(true);
+                        return false;
+                    }
+                })
                 .into(imgCardDetails);
     }
 
@@ -142,6 +144,11 @@ public class CardDetailsActivity extends BaseActivity implements CardDetailsView
     }
 
     @Override
+    public void navigateToCardPreview(String imgUrl) {
+        startActivity(CardPreviewActivity.createCardPreviewActivity(this, imgUrl));
+    }
+
+    @Override
     public void setCardFlavour(String flavour) {
         if(TextUtils.isEmpty(flavour))
             txtCardFlavour.setVisibility(View.GONE);
@@ -163,5 +170,22 @@ public class CardDetailsActivity extends BaseActivity implements CardDetailsView
             txtTags.setVisibility(View.GONE);
         else
             txtTags.setText(tag);
+    }
+    //endregion
+
+    //region Private methods
+    private void setupToolbar(){
+        setSupportActionBar(toolbar);
+        if(getSupportActionBar() != null){
+            getSupportActionBar().setTitle(R.string.card_details_toolbar_title);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
+    }
+    //endregion
+
+    public static Intent createCardDetailsIntent(Context context, String selectedCardName){
+        Intent intent = new Intent(context, CardDetailsActivity.class);
+        intent.putExtra(EXTRA_CARD_NAME, selectedCardName);
+        return intent;
     }
 }

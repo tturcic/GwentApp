@@ -6,6 +6,6 @@ package com.tt.gwentapp.models;
  */
 public enum SortOrder {
 
-    DEFAULT,            // Return cards sorted by name and by rarity
+    DEFAULT,            // Return cards sorted by name ascending and by rarity ascending
 
 }

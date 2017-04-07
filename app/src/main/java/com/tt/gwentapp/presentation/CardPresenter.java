@@ -13,6 +13,8 @@ import java.util.List;
 /**
  * @author tturcic
  *         \date 27.3.2017.
+ *
+ *         TODO - move rarity (and any other filtering) logic to separate class
  */
 public class CardPresenter extends BasePresenter<CardView> {
 

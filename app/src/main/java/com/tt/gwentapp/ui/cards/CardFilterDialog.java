@@ -22,6 +22,8 @@ import butterknife.Unbinder;
 /**
  * @author tturcic
  *         \date 5.4.2017.
+ *
+ *         TODO - create a separate presenter for creating card filters
  */
 public class CardFilterDialog extends DialogFragment {
 
